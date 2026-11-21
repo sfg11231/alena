@@ -1,0 +1,423 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fff0f4">
+  <title>Для Алёны ♡</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="background-hearts" id="backgroundHearts"></div>
+
+  <button class="music-button" id="musicButton" onclick="toggleMusic()">♫</button>
+  <audio id="backgroundMusic" src="audio/music.mp3" loop></audio>
+
+  <!-- ГЛАВНАЯ -->
+  <section class="screen active" id="welcome">
+    <div class="welcome-content">
+      <p class="eyebrow">Для тебя, любимая</p>
+      <div class="main-heart">♡</div>
+      <h1>Для самой любимой</h1>
+      <p class="welcome-text">
+        Я приготовил кое-что особенное.<br>
+        И это всё — только для тебя.
+      </p>
+
+      <div class="countdown-box" id="countdownBox">
+        <p>До твоего дня осталось</p>
+        <div class="countdown" id="countdown">
+          <div><span id="days">00</span><small>дней</small></div>
+          <div><span id="hours">00</span><small>часов</small></div>
+          <div><span id="minutes">00</span><small>минут</small></div>
+          <div><span id="seconds">00</span><small>секунд</small></div>
+        </div>
+      </div>
+
+      <div class="birthday-celebration" id="birthdayCelebration">
+        <div class="celebration-heart">♥</div>
+        <h2>Сегодня твой день, любимая!</h2>
+        <p>Сегодня весь мир должен улыбаться тебе.</p>
+      </div>
+
+      <button class="primary-button" id="startButton" onclick="startAdventure()">
+        Начать наше приключение
+      </button>
+
+      <p class="date-text" id="dateText">05.12.2026 ♡</p>
+    </div>
+  </section>
+
+  <!-- ВОПРОС -->
+  <section class="screen question-screen" id="questionScreen">
+    <div class="question-content">
+      <div class="question-heart">♡</div>
+      <p class="eyebrow">Только честно</p>
+      <h1>Ты счастлива?</h1>
+      <p>Мне очень важно знать это</p>
+
+      <div class="answer-buttons" id="answerButtons">
+        <button class="yes-button" id="yesButton">Да</button>
+        <button class="no-button" id="noButton" onclick="answerNo()">Нет</button>
+      </div>
+
+      <div class="runaway-message" id="runawayMessage"></div>
+    </div>
+  </section>
+
+  <!-- ОТВЕТ НЕТ -->
+<section class="screen question-screen" id="noScreen">
+  <div class="question-content">
+
+    <img src="images/no-screen.jpg" class="no-screen-photo" alt="">
+
+    <div class="question-heart">♡</div>
+    <h1>А вот и неправда…</h1>
+
+    <p class="no-message">
+      Я знаю, что у нас не каждый день идеальный.
+      Бывают усталость, переживания и сложные моменты.
+      Но я всё равно хочу делать тебя счастливой.
+      И надеюсь, что впереди у нас ещё очень много поводов
+      улыбаться вместе.
+    </p>
+
+    <button class="primary-button" onclick="retryQuestion()">
+      Попробовать ещё раз
+    </button>
+
+  </div>
+</section>
+
+  <!-- ОТВЕТ ДА -->
+  <section class="screen question-screen" id="yesScreen">
+    <div class="question-content yes-result">
+      <div class="success-heart">♥</div>
+      <h1>Вот теперь я счастлив тоже</h1>
+      <p>И хочу, чтобы таких моментов у нас было ещё очень много.</p>
+
+      <button class="primary-button" onclick="continueAdventure()">
+        Продолжить наше приключение
+      </button>
+    </div>
+  </section>
+
+  <!-- НОВЫЙ ЭТАП: ДОСТУП АЛЁНЕ -->
+  <section class="screen access-screen" id="accessScreen">
+    <div class="access-card">
+
+      <div class="access-top">
+        <span class="access-status-dot"></span>
+        <span>LOVE_SYSTEM // SECURE TERMINAL</span>
+      </div>
+
+      <div class="terminal-content" id="terminalContent">
+        <p class="terminal-line">СИСТЕМА: МОЁ СЕРДЦЕ</p>
+        <p class="terminal-line">Запуск системы...</p>
+        <p class="terminal-line">Сканирование пользователя...</p>
+        <p class="terminal-line">Пользователь обнаружен: АЛЁНА</p>
+        <p class="terminal-line warning-line">Статус: НЕ АВТОРИЗОВАН</p>
+      </div>
+
+      <div class="access-intro" id="accessIntro">
+        <div class="access-heart">♡</div>
+        <h1>Доступ Алёне</h1>
+        <p>
+          Для доступа к системе<br>
+          необходимо подтвердить личность.
+        </p>
+        <button class="primary-button" id="accessStartButton" onclick="startAccess()">
+          Получить доступ
+        </button>
+      </div>
+
+      <!-- ЗАГАДКА -->
+      <div class="password-section" id="passwordSection">
+        <div class="terminal-question">
+          <p>Вспомни день, когда всё началось.</p>
+          <p>В каком месяце началась наша история?</p>
+        </div>
+
+        <div class="password-input-wrap">
+          <span class="password-prefix">&gt;</span>
+          <input
+            type="text"
+            id="passwordInput"
+            placeholder="Введите пароль..."
+            autocomplete="off"
+            autocapitalize="none"
+          >
+        </div>
+
+        <button class="primary-button" id="passwordButton" onclick="checkPassword()">
+          Авторизоваться
+        </button>
+
+        <p class="password-error" id="passwordError"></p>
+      </div>
+
+      <!-- УСПЕШНАЯ АВТОРИЗАЦИЯ -->
+      <div class="access-granted" id="accessGranted">
+        <div class="unlock-heart" id="unlockHeart">♥</div>
+
+        <p class="access-success-title">ДОСТУП РАЗРЕШЁН</p>
+        <p class="access-user">ПОЛЬЗОВАТЕЛЬ: АЛЁНА</p>
+        <p class="access-level">УРОВЕНЬ ДОСТУПА: МАКСИМАЛЬНЫЙ</p>
+
+        <div class="privileges">
+          <p>∞ — Любимая</p>
+          <p>∞ — Самая важная</p>
+          <p>∞ — Моё счастье</p>
+          <p>∞ — Единственная</p>
+        </div>
+
+        <div class="secret-message" id="secretMessage">
+          <p>
+            Кажется, я пытался создать систему защиты,
+            но забыл самое главное...
+          </p>
+
+          <p>
+            Ты уже давно имеешь доступ ко всему,
+            что есть во мне.
+          </p>
+
+          <p>
+            К моим мыслям, планам, мечтам и сердцу.
+          </p>
+
+          <p class="secret-final">
+            И пароль тебе никогда не понадобится.
+          </p>
+        </div>
+
+        <button class="primary-button" id="accessContinueButton" onclick="finishAccess()">
+          Я хочу продолжить
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ПИСЬ -->
+  <section class="screen" id="letterScreen">
+    <div class="card">
+      <p class="eyebrow">Несколько слов от меня</p>
+      <div class="card-heart">♡</div>
+      <h1>Моя любимая Алёна</h1>
+
+      <div class="letter-text">
+        <p>
+          Я долго думал, как сделать для тебя что-то особенное.
+          Хотел подарить не просто вещь, а что-то, к чему ты
+          сможешь возвращаться, улыбаться и чувствовать, насколько
+          сильно ты мне дорога.
+        </p>
+
+        <p>
+          Иногда мне сложно правильно выразить свои чувства словами.
+          Но я хочу, чтобы ты знала: я очень ценю тебя, твою заботу,
+          поддержку, твоё присутствие рядом и даже наши самые обычные дни.
+        </p>
+
+        <p>
+          Ты стала частью моей жизни, частью моих планов и того будущего,
+          к которому я хочу идти. Спасибо, что ты рядом.
+        </p>
+
+        <p>
+          Я люблю тебя. И хочу становиться лучше не только для себя,
+          но и для нас.
+        </p>
+      </div>
+
+      <button class="primary-button" onclick="nextScreen('storyScreen')">
+        Дальше
+      </button>
+    </div>
+  </section>
+
+  <!-- НАША ИСТОРИЯ -->
+  <section class="screen" id="storyScreen">
+    <div class="card">
+      <p class="eyebrow">С того самого дня</p>
+      <div class="card-heart">♡</div>
+      <h1>Наша история</h1>
+
+      <p class="story-text">
+        5 июля 2025 года началась наша история.
+        С тех пор появилось столько воспоминаний, моментов,
+        улыбок, поездок и маленьких событий, которые стали
+        важными именно потому, что мы пережили их вместе.
+      </p>
+
+      <div class="relationship-timer">
+        <p>Мы вместе уже</p>
+        <div class="timer-grid">
+          <div><span id="relDays">0</span><small>дней</small></div>
+          <div><span id="relHours">0</span><small>часов</small></div>
+          <div><span id="relMinutes">0</span><small>минут</small></div>
+          <div><span id="relSeconds">0</span><small>секунд</small></div>
+        </div>
+      </div>
+
+      <p class="story-end">И это только начало…</p>
+
+      <button class="primary-button" onclick="nextScreen('galleryScreen')">
+        Наши воспоминания
+      </button>
+    </div>
+  </section>
+
+  <!-- ФОТО -->
+  <section class="screen" id="galleryScreen">
+    <div class="card wide-card">
+      <p class="eyebrow">Моменты, которые хочется сохранить</p>
+      <h1>Наши воспоминания</h1>
+      <p class="subtitle">Каждая фотография — маленькая история</p>
+
+      <div class="gallery">
+
+        <div class="photo-item">
+          <img src="images/photo1.jpg" alt="Поездка в Сочи" onclick="openPhoto(this)">
+          <p class="photo-caption">
+            Одна из поездок, которая навсегда останется в моей памяти.
+            Ты подарила мне столько эмоций, а это время до сих пор
+            напоминает мне об одном из лучших периодов моей жизни.
+          </p>
+        </div>
+
+        <div class="photo-item">
+          <img src="images/photo2.jpg" alt="Наш первый год" onclick="openPhoto(this)">
+          <p class="photo-caption">
+            Наш первый год вместе — столько радости, эмоций и счастливых
+            моментов. Очень важное для меня событие, которое я всегда
+            буду вспоминать с особой улыбкой.
+          </p>
+        </div>
+
+        <div class="photo-item">
+          <img src="images/photo3.jpg" alt="Поступление в университет" onclick="openPhoto(this)">
+          <p class="photo-caption">
+            Важный шаг в моей жизни, к которому ты тоже приложила руку.
+            Спасибо, что помогла мне с выбором, поехала со мной
+            и провела этот день рядом. Для меня это намного больше,
+            чем просто поездка.
+          </p>
+        </div>
+
+        <div class="photo-item">
+          <img src="images/photo4.jpg" alt="Наш поход по магазинам" onclick="openPhoto(this)">
+          <p class="photo-caption">
+            У этого дня свой особенный вайб. Я обожаю наши походы
+            по магазинам, выбирать вещи, рассматривать всё подряд
+            и просто проводить так время с тобой. Такие, казалось бы,
+            обычные моменты для меня тоже очень ценны.
+          </p>
+        </div>
+
+        <div class="photo-item">
+          <img src="images/photo5.jpg" alt="Праздник" onclick="openPhoto(this)">
+          <p class="photo-caption">
+            Ещё один замечательный день, наполненный теплом, смехом
+            и хорошими эмоциями. Было здорово увидеть всех родных,
+            провести время вместе и стать частью такого уютного момента.
+          </p>
+        </div>
+
+      </div>
+
+      <button class="primary-button" onclick="nextScreen('reasonsScreen')">
+        100 причин, почему я люблю тебя
+      </button>
+    </div>
+  </section>
+
+  <!-- ПРОСМОТР ФОТО -->
+  <div class="photo-viewer" id="photoViewer" onclick="closePhoto()">
+    <button class="close-viewer">×</button>
+    <img id="viewerImage" src="" alt="Фото">
+  </div>
+
+  <!-- 100 ПРИЧИН -->
+  <section class="screen" id="reasonsScreen">
+    <div class="card">
+      <p class="eyebrow">От всего сердца</p>
+      <div class="card-heart">♡</div>
+      <h1>100 причин, почему я люблю тебя</h1>
+      <p class="subtitle">И даже это не всё</p>
+
+      <div class="reasons-list" id="reasonsList"></div>
+
+      <button class="primary-button" onclick="nextScreen('giftsScreen')">
+        У меня есть ещё кое-что
+      </button>
+    </div>
+  </section>
+
+  <!-- ПОДАРКИ -->
+  <section class="screen" id="giftsScreen">
+    <div class="card">
+      <p class="eyebrow">Маленькие сюрпризы</p>
+      <div class="card-heart">♡</div>
+      <h1>Для тебя</h1>
+      <p class="subtitle">Выбери карточку</p>
+
+      <div class="gift-grid">
+        <button class="gift-card" onclick="openGift(0)">
+          <span class="gift-icon">♡</span>
+          <span>Подарок №1</span>
+          <small>Нажми, чтобы открыть</small>
+        </button>
+
+        <button class="gift-card" onclick="openGift(1)">
+          <span class="gift-icon">✿</span>
+          <span>Подарок №2</span>
+          <small>Нажми, чтобы открыть</small>
+        </button>
+
+        <button class="gift-card" onclick="openGift(2)">
+          <span class="gift-icon">✧</span>
+          <span>Подарок №3</span>
+          <small>Нажми, чтобы открыть</small>
+        </button>
+      </div>
+
+      <div class="gift-message" id="giftMessage"></div>
+
+      <button class="primary-button" onclick="nextScreen('finalScreen')">
+        Последний сюрприз
+      </button>
+    </div>
+  </section>
+
+  <!-- ФИНАЛ -->
+  <section class="screen" id="finalScreen">
+    <div class="final-content">
+      <div class="final-heart">♥</div>
+      <p class="eyebrow">С днём рождения, любимая</p>
+      <h1>Алёна, я люблю тебя</h1>
+
+      <p class="final-message">
+        Пусть в твоей жизни будет как можно больше счастья,
+        тепла, искренних улыбок и исполнения желаний.
+        Я хочу быть рядом, разделять с тобой самые яркие моменты
+        и создавать новые воспоминания.
+      </p>
+
+      <p class="final-signature">
+        С любовью,<br>
+        Ростислав ♡
+      </p>
+
+      <div class="final-date">05.12.2026</div>
+    </div>
+  </section>
+
+  <div class="petals-container" id="petalsContainer"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
